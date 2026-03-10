@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.H University Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        nav { background-color: #0f172a; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.025em; }
+        header { text-align: center; padding: 4rem 1rem 3rem; max-width: 800px; margin: 0 auto; }
+        header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(to right, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { color: var(--text-muted); font-size: 1.25rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--card-bg); border-radius: 1rem; border: 1px solid #e2e8f0; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden; position: relative; }
+        .card-top { padding: 2rem 2rem 1.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .icon-box { width: 64px; height: 64px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--primary); transition: 0.3s; }
+        .card:hover .icon-box { background: var(--primary); color: #fff; }
+        .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .card p.desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+        .btn-toggle { width: 100%; margin: 0 0 1.25rem; padding: 0.7rem 1.5rem; background-color: var(--primary); color: white; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'Inter', sans-serif; }
+        .btn-toggle:hover { background-color: var(--primary-hover); }
+        .btn-toggle .arrow { display: inline-block; transition: transform 0.3s ease; font-size: 0.8rem; }
+        .btn-toggle.open .arrow { transform: rotate(180deg); }
+        .dropdown-panel { width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; background: #f8fafc; border-top: 1px solid #e2e8f0; }
+        .dropdown-panel.open { max-height: 600px; padding-bottom: 1rem; }
+        .chapter-group { padding: 0.85rem 1.25rem 0; }
+        .chapter-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.45rem; }
+        .chapter-links { display: flex; gap: 0.5rem; }
+        .link-btn { flex: 1; padding: 0.45rem 0.5rem; border-radius: 0.4rem; font-size: 0.82rem; font-weight: 600; text-decoration: none; text-align: center; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.3rem; }
+        .link-btn.pdf { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+        .link-btn.pdf:hover { background: #e11d48; color: white; border-color: #e11d48; }
+        .link-btn.html { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .link-btn.html:hover { background: #2563eb; color: white; border-color: #2563eb; }
+        svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .link-icon { width: 14px; height: 14px; stroke-width: 2.5; }
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+        @media (max-width: 768px) { header h1 { font-size: 2.25rem; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="#" class="logo">M.H PORTAL</a>
+    </div>
+</nav>
+
+<header>
+    <h1>M.H FCDS</h1>
+    <p>All my Summaries By: Eng/Moataz Hassien</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+
+        <!-- ═══ Data Structures ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <h3>Data Structures</h3>
+                <p class="desc">Master algorithms, trees, and efficient data organization patterns.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <div class="chapter-group">
+                    <div class="chapter-label">Chapter 1</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1-WzO79Caagtko2sOjYPVXbY9lTJG5A1E/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Intro to AI ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3>Intro to AI</h3>
+                <p class="desc">Explore the world of Machine Learning and neural networks.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <!-- Add chapters here when available -->
+            </div>
+        </div>
+
+        <!-- ═══ Probability 1 ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                </div>
+                <h3>Probability 1</h3>
+                <p class="desc">Foundations of randomness, distributions, and statistical analysis.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <div class="chapter-group">
+                    <div class="chapter-label">Probability Summary Lecture 1</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1gRdrvpjQDaEEPj3Ieic0k6dJ97qbfEIn/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="chapter-group">
+                    <div class="chapter-label">Chapter 1</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1nGzxH0PGh-HN1v1qAlGuE0J7fLWrWHV-/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                        <a href="https://moatazhassien.github.io/Summary-chapter-1-probability/" class="link-btn html" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            HTML
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Discrete Structures ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </div>
+                <h3>Discrete Structures</h3>
+                <p class="desc">Logic, set theory, and mathematical proofs for Computer Science.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <div class="chapter-group">
+                    <div class="chapter-label">Chapter 1</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1hofeJEyMYARY8WdWlrenqemjP3TUPzF3/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                        <a href="https://moatazhassien.github.io/Summary-chapter-1-Discrete/" class="link-btn html" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            HTML
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Programming 2 ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3>Programming 2</h3>
+                <p class="desc">Advanced OOP concepts, application design, and clean coding.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <div class="chapter-group">
+                    <div class="chapter-label">Chapter 1</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1WP9KG3Tv5il6DmOXcpYvnxIwpC3khRkW/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="chapter-group">
+                    <div class="chapter-label">Chapter 2</div>
+                    <div class="chapter-links">
+                        <a href="https://drive.google.com/file/d/1-JIs1Zcrz_t1AOmkhsKgmTeTsVUAp7qc/view?usp=sharing" class="link-btn pdf" target="_blank">
+                            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Innovation ═══ -->
+        <div class="card">
+            <div class="card-top">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v8"></path><path d="m4.93 4.93 5.66 5.66"></path><path d="M2 12h8"></path><path d="m4.93 19.07 5.66-5.66"></path><path d="M12 22v-8"></path><path d="m19.07 19.07-5.66-5.66"></path><path d="M22 12h-8"></path><path d="m19.07 4.93-5.66 5.66"></path></svg>
+                </div>
+                <h3>Innovation & Ent.</h3>
+                <p class="desc">Startups, creative thinking, and modern business strategies.</p>
+                <button class="btn-toggle" onclick="toggleCard(this)">
+                    View Summaries <span class="arrow">▼</span>
+                </button>
+            </div>
+            <div class="dropdown-panel">
+                <!-- Add chapters here when available -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 M.H By: Eng/Moataz Hassien
+</footer>
+
+<script>
+    function toggleCard(btn) {
+        const panel = btn.closest('.card').querySelector('.dropdown-panel');
+        const isOpen = panel.classList.contains('open');
+        document.querySelectorAll('.dropdown-panel.open').forEach(p => p.classList.remove('open'));
+        document.querySelectorAll('.btn-toggle.open').forEach(b => b.classList.remove('open'));
+        if (!isOpen) {
+            panel.classList.add('open');
+            btn.classList.add('open');
+        }
+    }
+</script>
+
+</body>
+</html>
