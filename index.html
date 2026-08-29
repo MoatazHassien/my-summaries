@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M.H University Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -70,11 +69,11 @@
 
         /* DROPDOWN */
         .dropdown-panel { width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #f8fafc; }
-        .dropdown-panel.open { max-height: 800px; border-top: 1px solid #e2e8f0; padding-bottom: 1rem; }
+        .dropdown-panel.open { max-height: 1200px; border-top: 1px solid #e2e8f0; padding-bottom: 1rem; }
         .chapter-group { padding: 0.85rem 1.25rem 0; }
         .chapter-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 0.45rem; }
-        .chapter-links { display: flex; gap: 0.5rem; }
-        .link-btn { flex: 1; padding: 0.45rem 0.5rem; border-radius: 0.4rem; font-size: 0.82rem; font-weight: 600; text-decoration: none; text-align: center; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.3rem; }
+        .chapter-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .link-btn { flex: 1; min-width: 70px; padding: 0.45rem 0.5rem; border-radius: 0.4rem; font-size: 0.82rem; font-weight: 600; text-decoration: none; text-align: center; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.3rem; }
         .link-btn.pdf { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
         .link-btn.pdf:hover { background: #e11d48; color: white; border-color: #e11d48; }
         .link-btn.html { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
@@ -87,6 +86,56 @@
 
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
         @media (max-width: 768px) { header h1 { font-size: 2.25rem; } .grid { grid-template-columns: 1fr; } }
+
+        /* ══════════ ADMIN ══════════ */
+        #admin-fab {
+            position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 2000;
+            width: 42px; height: 42px; border-radius: 50%;
+            background: #0f172a; color: #64748b; border: 1px solid #1e293b;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0.35; transition: all 0.2s;
+        }
+        #admin-fab:hover { opacity: 1; color: #fff; }
+        #admin-fab svg { width: 18px; height: 18px; }
+
+        .admin-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6);
+            z-index: 3000; align-items: center; justify-content: center; padding: 1rem;
+            direction: rtl; font-family: 'Inter', sans-serif;
+        }
+        .admin-overlay.open { display: flex; }
+        .admin-box {
+            background: #fff; border-radius: 1rem; width: 100%; max-width: 480px;
+            max-height: 88vh; overflow-y: auto; padding: 1.75rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .admin-box h2 { font-size: 1.15rem; margin-bottom: 1rem; }
+        .admin-box label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin: 0.9rem 0 0.35rem; }
+        .admin-box input[type=text], .admin-box input[type=url], .admin-box input[type=password], .admin-box select, .admin-box textarea {
+            width: 100%; padding: 0.6rem 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif; font-size: 0.9rem; background: #f8fafc;
+        }
+        .admin-row { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.4rem; }
+        .admin-row select { width: 90px; flex-shrink: 0; }
+        .admin-btn { margin-top: 1.25rem; width: 100%; padding: 0.7rem; border: none; border-radius: 0.5rem; background: var(--primary); color: #fff; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+        .admin-btn:hover { background: var(--primary-hover); }
+        .admin-btn.secondary { background: #f1f5f9; color: var(--text-main); margin-top: 0.5rem; }
+        .admin-btn.secondary:hover { background: #e2e8f0; }
+        .admin-btn.danger { background: #fff1f2; color: #e11d48; }
+        .admin-btn.tiny { width: auto; padding: 0.35rem 0.6rem; font-size: 0.75rem; margin: 0; }
+        .admin-link-row { display: flex; gap: 0.4rem; align-items: center; margin-top: 0.4rem; }
+        .admin-link-row select { width: 85px; }
+        .admin-link-row input { flex: 1; }
+        .admin-x { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem; padding: 0 0.3rem; }
+        .admin-close { float: left; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
+        .admin-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.5; background: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 0.5rem; }
+        .admin-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
+        .admin-tab { flex: 1; padding: 0.5rem; text-align: center; border-radius: 0.5rem; background: #f1f5f9; cursor: pointer; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); }
+        .admin-tab.active { background: var(--primary); color: #fff; }
+        .admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.7rem; background: #f8fafc; border-radius: 0.4rem; margin-top: 0.4rem; font-size: 0.85rem; }
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+        .add-link-btn { background: none; border: 1px dashed #cbd5e1; color: var(--text-muted); border-radius: 0.4rem; padding: 0.35rem 0.6rem; font-size: 0.78rem; cursor: pointer; margin-top: 0.4rem; }
     </style>
 </head>
 <body>
@@ -97,8 +146,8 @@
         <span class="logo">M.H PORTAL</span>
         <div class="visitor-badge">
             <svg class="icon-sm" viewBox="0 0 24 24">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
             </svg>
             <span class="v-num" id="visitor-count">…</span>
             <span class="v-label">visitors</span>
@@ -112,264 +161,199 @@
     <p>All my Summaries By: Eng/Moataz Hassien</p>
 </header>
 
-<!-- ══════════ GRID ══════════ -->
+<!-- ══════════ GRID (rendered by JS) ══════════ -->
 <div class="container">
-  <div class="grid">
+  <div class="grid" id="grid"></div>
+</div>
 
-    <!-- ═══ Data Structures ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-        </div>
-        <h3>Data Structures</h3>
-        <p class="desc">Master algorithms, trees, and efficient data organization patterns.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-ds" onclick="toggleLike('ds')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-ds" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-ds">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-ds" onclick="toggleCard('ds')">View Summaries <span class="arrow">▼</span></button>
-        </div>
-      </div>
-      <div class="dropdown-panel" id="pan-ds">
-        <div class="chapter-group">
-          <div class="chapter-label">Chapter 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1-WzO79Caagtko2sOjYPVXbY9lTJG5A1E/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-          </div>
-        </div>
-      </div>
+<footer>© 2026 M.H By: Eng/Moataz Hassien</footer>
+
+<!-- ══════════ ADMIN FAB ══════════ -->
+<div id="admin-fab" onclick="openAdmin()" title="Admin">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+</div>
+
+<!-- ══════════ ADMIN OVERLAY ══════════ -->
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-box">
+    <button class="admin-close" onclick="closeAdmin()">×</button>
+
+    <!-- Password screen -->
+    <div id="admin-pass-screen">
+      <h2>🔒 دخول الأدمن</h2>
+      <label>كلمة السر</label>
+      <input type="password" id="admin-pass-input" placeholder="اكتب كلمة السر">
+      <button class="admin-btn" onclick="checkPassword()">دخول</button>
+      <p class="admin-note">كلمة السر الافتراضية: <b>moataz2026</b> — تقدر تغيّرها من جوا الكود (متغير ADMIN_PASSWORD) وقت ما تحب.</p>
     </div>
 
-    <!-- ═══ Intro to AI ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>Intro to AI</h3>
-        <p class="desc">Explore the world of Machine Learning and neural networks.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-ai" onclick="toggleLike('ai')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-ai" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-ai">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-ai" onclick="toggleCard('ai')">View Summaries <span class="arrow">▼</span></button>
-        </div>
+    <!-- Panel screen -->
+    <div id="admin-panel-screen" style="display:none;">
+      <h2>⚙️ إدارة المحتوى</h2>
+
+      <div class="admin-tabs">
+        <div class="admin-tab active" id="tab-add" onclick="switchTab('add')">➕ إضافة</div>
+        <div class="admin-tab" id="tab-manage" onclick="switchTab('manage')">🗂️ إدارة الحالي</div>
       </div>
-      <div class="dropdown-panel" id="pan-ai">
-        <div class="chapter-group">
-          <div class="chapter-label">Summary Section 1, 2, 3, 4</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1vKXytQn739uAeQg9yon0ly7pR6gf7pxX/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-            <a href="https://moatazhassien.github.io/summary-sec1-2-3-4-python/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
+
+      <!-- ADD SECTION -->
+      <div class="admin-section active" id="section-add">
+        <label>المادة</label>
+        <select id="subject-select" onchange="onSubjectChange()"></select>
+
+        <div id="new-subject-fields" style="display:none;">
+          <label>اسم المادة الجديدة</label>
+          <input type="text" id="new-subject-title" placeholder="مثال: Programming 1">
+          <label>وصف قصير</label>
+          <input type="text" id="new-subject-desc" placeholder="جملة بسيطة عن المادة">
+          <label>الأيقونة</label>
+          <select id="new-subject-icon">
+            <option value="book">كتاب</option>
+            <option value="shield">درع</option>
+            <option value="clock">ساعة</option>
+            <option value="grid">شبكة</option>
+            <option value="code">كود</option>
+            <option value="star">نجمة</option>
+            <option value="target">هدف</option>
+          </select>
         </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Summary Section 5 — BFS &amp; DFS + 50 Questions</div>
-          <div class="chapter-links">
-            <a href="https://moatazhassien.github.io/BFS-DFS/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Summary Section 6 — Greedy Best-First &amp; A* Search + 50 Questions</div>
-          <div class="chapter-links">
-            <a href="https://moatazhassien.github.io/greedy/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Search Algorithms — Complete Review (100 Questions)</div>
-          <div class="chapter-links">
-            <a href="https://moatazhassien.github.io/Search-Algorithms-Complete-Review/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Summary — Minimax &amp; Alpha-Beta Pruning + 50 Questions</div>
-          <div class="chapter-links">
-            <a href="https://moatazhassien.github.io/minimax/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
+
+        <label>اسم الفصل / المجموعة (مثال: Chapter 1)</label>
+        <input type="text" id="chapter-label" placeholder="Chapter 1">
+
+        <label>الروابط</label>
+        <div id="link-rows"></div>
+        <button class="add-link-btn" onclick="addLinkRow()">+ إضافة رابط تاني</button>
+
+        <button class="admin-btn" onclick="saveGroup()">💾 حفظ الإضافة</button>
       </div>
+
+      <!-- MANAGE SECTION -->
+      <div class="admin-section" id="section-manage">
+        <div id="manage-list"></div>
+      </div>
+
+      <button class="admin-btn secondary" onclick="downloadSite()">⬇️ تحميل الملف المحدّث (index.html)</button>
+      <button class="admin-btn danger" onclick="resetLocalAdmin()">↩️ إلغاء كل تعديلاتي المحلية</button>
+
+      <p class="admin-note">
+        التعديلات دي بتتحفظ في متصفحك بس، عشان تظهر لكل الزوار لازم تدوس "تحميل الملف المحدّث" وترفع الملف الناتج على استضافة الموقع بدل القديم.
+      </p>
     </div>
-
-    <!-- ═══ Probability 1 ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3>Probability 1</h3>
-        <p class="desc">Foundations of randomness, distributions, and statistical analysis.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-prob" onclick="toggleLike('prob')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-prob" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-prob">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-prob" onclick="toggleCard('prob')">View Summaries <span class="arrow">▼</span></button>
-        </div>
-      </div>
-      <div class="dropdown-panel" id="pan-prob">
-        <div class="chapter-group">
-          <div class="chapter-label">Probability Summary Lecture 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1gRdrvpjQDaEEPj3Ieic0k6dJ97qbfEIn/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Chapter 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1nGzxH0PGh-HN1v1qAlGuE0J7fLWrWHV-/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-            <a href="https://moatazhassien.github.io/Summary-chapter-1-probability/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">50 Questions on Chapter 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1H7bw3EPrPt-Ae-Xz1HHiM0CY-tRMzTpr/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ Discrete Structures ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </div>
-        <h3>Discrete Structures</h3>
-        <p class="desc">Logic, set theory, and mathematical proofs for Computer Science.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-discrete" onclick="toggleLike('discrete')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-discrete" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-discrete">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-discrete" onclick="toggleCard('discrete')">View Summaries <span class="arrow">▼</span></button>
-        </div>
-      </div>
-      <div class="dropdown-panel" id="pan-discrete">
-        <div class="chapter-group">
-          <div class="chapter-label">Chapter 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1hofeJEyMYARY8WdWlrenqemjP3TUPzF3/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-            <a href="https://moatazhassien.github.io/Summary-chapter-1-Discrete/" class="link-btn html" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ Programming 2 ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <h3>Programming 2</h3>
-        <p class="desc">Advanced OOP concepts, application design, and clean coding.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-prog2" onclick="toggleLike('prog2')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-prog2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-prog2">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-prog2" onclick="toggleCard('prog2')">View Summaries <span class="arrow">▼</span></button>
-        </div>
-      </div>
-      <div class="dropdown-panel" id="pan-prog2">
-        <div class="chapter-group">
-          <div class="chapter-label">Chapter 1</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1WP9KG3Tv5il6DmOXcpYvnxIwpC3khRkW/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-          </div>
-        </div>
-        <div class="chapter-group">
-          <div class="chapter-label">Chapter 2</div>
-          <div class="chapter-links">
-            <a href="https://drive.google.com/file/d/1-JIs1Zcrz_t1AOmkhsKgmTeTsVUAp7qc/view?usp=sharing" class="link-btn pdf" target="_blank">
-              <svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ Innovation ═══ -->
-    <div class="card">
-      <div class="card-top">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24"><path d="M12 2v8"/><path d="m4.93 4.93 5.66 5.66"/><path d="M2 12h8"/><path d="m4.93 19.07 5.66-5.66"/><path d="M12 22v-8"/><path d="m19.07 19.07-5.66-5.66"/><path d="M22 12h-8"/><path d="m19.07 4.93-5.66 5.66"/></svg>
-        </div>
-        <h3>Innovation &amp; Ent.</h3>
-        <p class="desc">Startups, creative thinking, and modern business strategies.</p>
-        <div class="action-row">
-          <button class="btn-like" id="like-innov" onclick="toggleLike('innov')">
-            <span class="heart-icon"><svg class="icon-sm" id="hsvg-innov" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-            <span id="lc-innov">0</span>
-          </button>
-          <button class="btn-toggle" id="tog-innov" onclick="toggleCard('innov')">View Summaries <span class="arrow">▼</span></button>
-        </div>
-      </div>
-      <div class="dropdown-panel" id="pan-innov">
-        <!-- Add chapters when available -->
-      </div>
-    </div>
-
-  </div><!-- /grid -->
-</div><!-- /container -->
-
-<footer>&copy; 2026 M.H By: Eng/Moataz Hassien</footer>
+  </div>
+</div>
 
 <script>
 // ══════════════════════════════════════════
-//  CONFIG
+//  ADMIN CONFIG — غيّر كلمة السر من هنا وقت ما تحب
 // ══════════════════════════════════════════
-const COURSES = ['ds','ai','prob','discrete','prog2','innov'];
+const ADMIN_PASSWORD = "eng.moataz1212*";
+
+// ══════════════════════════════════════════
+//  ICONS
+// ══════════════════════════════════════════
+const ICONS = {
+  book:   '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  clock:  '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  grid:   '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+  code:   '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  star:   '<path d="M12 2v8"/><path d="m4.93 4.93 5.66 5.66"/><path d="M2 12h8"/><path d="m4.93 19.07 5.66-5.66"/><path d="M12 22v-8"/><path d="m19.07 19.07-5.66-5.66"/><path d="M22 12h-8"/><path d="m19.07 4.93-5.66 5.66"/>',
+  target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'
+};
+
+/* ADMIN_DATA_START */
+const BASE_DATA = {};
+/* ADMIN_DATA_END */
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+let currentData = {};
 let openCard = null;
+let pristineTemplate = null;
+
+function loadData() {
+    currentData = JSON.parse(JSON.stringify(BASE_DATA));
+    const saved = localStorage.getItem('mh-admin-data');
+    if (saved) {
+        try { currentData = JSON.parse(saved); } catch (e) {}
+    }
+}
+
+function persistData() {
+    localStorage.setItem('mh-admin-data', JSON.stringify(currentData));
+}
+
+// ══════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════
+function pdfIcon() { return '<svg class="icon-xs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF'; }
+function htmlIcon() { return '<svg class="icon-xs" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> HTML'; }
+function heartIcon(id) { return '<svg class="icon-sm" id="hsvg-'+id+'" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'; }
+
+function renderGrid() {
+    const grid = document.getElementById('grid');
+    let html = '';
+    Object.keys(currentData).forEach(id => {
+        const c = currentData[id];
+        let chaptersHtml = '';
+        (c.chapters || []).forEach(ch => {
+            let linksHtml = '';
+            (ch.links || []).forEach(l => {
+                const cls = l.type === 'pdf' ? 'pdf' : 'html';
+                const label = l.type === 'pdf' ? pdfIcon() : htmlIcon();
+                linksHtml += `<a href="${l.url}" class="link-btn ${cls}" target="_blank">${label}</a>`;
+            });
+            chaptersHtml += `<div class="chapter-group"><div class="chapter-label">${ch.label}</div><div class="chapter-links">${linksHtml}</div></div>`;
+        });
+
+        html += `
+        <div class="card">
+          <div class="card-top">
+            <div class="icon-box"><svg viewBox="0 0 24 24">${ICONS[c.icon] || ICONS.book}</svg></div>
+            <h3>${c.title}</h3>
+            <p class="desc">${c.desc}</p>
+            <div class="action-row">
+              <button class="btn-like" id="like-${id}" onclick="toggleLike('${id}')">
+                <span class="heart-icon">${heartIcon(id)}</span>
+                <span id="lc-${id}">0</span>
+              </button>
+              <button class="btn-toggle" id="tog-${id}" onclick="toggleCard('${id}')">View Summaries <span class="arrow">▼</span></button>
+            </div>
+          </div>
+          <div class="dropdown-panel" id="pan-${id}">${chaptersHtml}</div>
+        </div>`;
+    });
+    grid.innerHTML = html;
+
+    // restore likes
+    const likes   = JSON.parse(localStorage.getItem('mh-likes')    || '{}');
+    const myLikes = JSON.parse(localStorage.getItem('mh-my-likes') || '{}');
+    Object.keys(currentData).forEach(id => {
+        const lc = document.getElementById('lc-' + id);
+        if (lc) lc.textContent = likes[id] || 0;
+        if (myLikes[id]) applyLiked(id, true);
+    });
+}
 
 // ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
-    // Visitor counter
+    pristineTemplate = document.documentElement.outerHTML;
+
     const visits = (parseInt(localStorage.getItem('mh-visitors') || '0')) + 1;
     localStorage.setItem('mh-visitors', visits);
     document.getElementById('visitor-count').textContent = visits.toLocaleString();
 
-    // Likes
-    const likes   = JSON.parse(localStorage.getItem('mh-likes')    || '{}');
-    const myLikes = JSON.parse(localStorage.getItem('mh-my-likes') || '{}');
-    COURSES.forEach(id => {
-        document.getElementById('lc-' + id).textContent = likes[id] || 0;
-        if (myLikes[id]) applyLiked(id, true);
-    });
+    loadData();
+    renderGrid();
+    addLinkRow();
+
+    if (localStorage.getItem('mh-admin-ok') === '1') {
+        // stays logged out visually; just skip forcing password next time they click the gear
+    }
 });
 
 // ══════════════════════════════════════════
@@ -389,7 +373,6 @@ function toggleLike(id) {
     document.getElementById('lc-' + id).textContent = likes[id];
     applyLiked(id, myLikes[id]);
 
-    // pop animation
     const btn = document.getElementById('like-' + id);
     btn.classList.add('pop');
     setTimeout(() => btn.classList.remove('pop'), 300);
@@ -398,6 +381,7 @@ function toggleLike(id) {
 function applyLiked(id, liked) {
     const btn = document.getElementById('like-' + id);
     const svg = document.getElementById('hsvg-' + id);
+    if (!btn || !svg) return;
     if (liked) {
         btn.classList.add('liked');
         svg.style.fill   = '#e11d48';
@@ -417,16 +401,210 @@ function toggleCard(id) {
     const tog   = document.getElementById('tog-' + id);
     const isOpen = panel.classList.contains('open');
 
-    // close previous
     if (openCard && openCard !== id) {
-        document.getElementById('pan-' + openCard).classList.remove('open');
-        document.getElementById('tog-' + openCard).classList.remove('open');
+        const p = document.getElementById('pan-' + openCard);
+        const t = document.getElementById('tog-' + openCard);
+        if (p) p.classList.remove('open');
+        if (t) t.classList.remove('open');
     }
 
     panel.classList.toggle('open', !isOpen);
     tog.classList.toggle('open', !isOpen);
     openCard = isOpen ? null : id;
 }
+
+// ══════════════════════════════════════════
+//  ADMIN — AUTH
+// ══════════════════════════════════════════
+function openAdmin() {
+    document.getElementById('admin-overlay').classList.add('open');
+    if (localStorage.getItem('mh-admin-ok') === '1') {
+        showPanel();
+    } else {
+        document.getElementById('admin-pass-screen').style.display = 'block';
+        document.getElementById('admin-panel-screen').style.display = 'none';
+        document.getElementById('admin-pass-input').value = '';
+    }
+}
+
+function closeAdmin() {
+    document.getElementById('admin-overlay').classList.remove('open');
+}
+
+function checkPassword() {
+    const val = document.getElementById('admin-pass-input').value;
+    if (val === ADMIN_PASSWORD) {
+        localStorage.setItem('mh-admin-ok', '1');
+        showPanel();
+    } else {
+        alert('كلمة السر غلط');
+    }
+}
+
+function showPanel() {
+    document.getElementById('admin-pass-screen').style.display = 'none';
+    document.getElementById('admin-panel-screen').style.display = 'block';
+    populateSubjectSelect();
+    switchTab('add');
+}
+
+// ══════════════════════════════════════════
+//  ADMIN — TABS
+// ══════════════════════════════════════════
+function switchTab(name) {
+    document.getElementById('tab-add').classList.toggle('active', name === 'add');
+    document.getElementById('tab-manage').classList.toggle('active', name === 'manage');
+    document.getElementById('section-add').classList.toggle('active', name === 'add');
+    document.getElementById('section-manage').classList.toggle('active', name === 'manage');
+    if (name === 'manage') renderManageList();
+}
+
+// ══════════════════════════════════════════
+//  ADMIN — ADD FORM
+// ══════════════════════════════════════════
+function populateSubjectSelect() {
+    const sel = document.getElementById('subject-select');
+    let html = '';
+    Object.keys(currentData).forEach(id => {
+        html += `<option value="${id}">${currentData[id].title}</option>`;
+    });
+    html += `<option value="__new__">＋ إضافة مادة جديدة</option>`;
+    sel.innerHTML = html;
+    onSubjectChange();
+}
+
+function onSubjectChange() {
+    const isNew = document.getElementById('subject-select').value === '__new__';
+    document.getElementById('new-subject-fields').style.display = isNew ? 'block' : 'none';
+}
+
+function addLinkRow() {
+    const wrap = document.getElementById('link-rows');
+    const row = document.createElement('div');
+    row.className = 'admin-link-row';
+    row.innerHTML = `
+        <select class="link-type">
+          <option value="pdf">PDF</option>
+          <option value="html">HTML</option>
+        </select>
+        <input type="url" class="link-url" placeholder="https://...">
+        <button class="admin-x" onclick="this.parentElement.remove()">×</button>`;
+    wrap.appendChild(row);
+}
+
+function slugify(text) {
+    let base = text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    if (!base) base = 'subject';
+    let slug = base, n = 1;
+    while (currentData[slug]) { slug = base + '-' + n; n++; }
+    return slug;
+}
+
+function saveGroup() {
+    const sel = document.getElementById('subject-select').value;
+    const label = document.getElementById('chapter-label').value.trim();
+
+    const links = [];
+    document.querySelectorAll('#link-rows .admin-link-row').forEach(row => {
+        const type = row.querySelector('.link-type').value;
+        const url = row.querySelector('.link-url').value.trim();
+        if (url) links.push({ type, url });
+    });
+
+    if (!label && links.length === 0) {
+        alert('اكتب اسم الفصل أو ضيف رابط واحد على الأقل');
+        return;
+    }
+
+    let subjectId = sel;
+    if (sel === '__new__') {
+        const title = document.getElementById('new-subject-title').value.trim();
+        if (!title) { alert('اكتب اسم المادة الجديدة'); return; }
+        const desc = document.getElementById('new-subject-desc').value.trim() || 'ملخصات ومحاضرات المادة.';
+        const icon = document.getElementById('new-subject-icon').value;
+        subjectId = slugify(title);
+        currentData[subjectId] = { icon, title, desc, chapters: [] };
+    }
+
+    if (label || links.length) {
+        currentData[subjectId].chapters.push({ label: label || 'روابط', links });
+    }
+
+    persistData();
+    renderGrid();
+    populateSubjectSelect();
+
+    // reset form
+    document.getElementById('chapter-label').value = '';
+    document.getElementById('new-subject-title').value = '';
+    document.getElementById('new-subject-desc').value = '';
+    document.getElementById('link-rows').innerHTML = '';
+    addLinkRow();
+
+    alert('تم الحفظ ✅ (محليًا عندك — لو عايز يظهر لكل الزوار نزّل الملف وارفعه)');
+}
+
+// ══════════════════════════════════════════
+//  ADMIN — MANAGE / DELETE
+// ══════════════════════════════════════════
+function renderManageList() {
+    const wrap = document.getElementById('manage-list');
+    let html = '';
+    Object.keys(currentData).forEach(subId => {
+        const s = currentData[subId];
+        html += `<div style="margin-top:0.8rem;"><b>${s.title}</b> <button class="admin-btn tiny danger" style="float:left" onclick="deleteSubject('${subId}')">حذف المادة</button></div>`;
+        (s.chapters || []).forEach((ch, idx) => {
+            html += `<div class="admin-list-item"><span>${ch.label} (${(ch.links||[]).length} رابط)</span><button class="admin-x" onclick="deleteChapter('${subId}', ${idx})">×</button></div>`;
+        });
+    });
+    wrap.innerHTML = html || '<p class="admin-note">لسه مفيش مواد.</p>';
+}
+
+function deleteChapter(subId, idx) {
+    currentData[subId].chapters.splice(idx, 1);
+    persistData();
+    renderGrid();
+    renderManageList();
+}
+
+function deleteSubject(subId) {
+    if (!confirm('متأكد إنك عايز تمسح المادة دي بكل اللي فيها؟')) return;
+    delete currentData[subId];
+    persistData();
+    renderGrid();
+    populateSubjectSelect();
+    renderManageList();
+}
+
+function resetLocalAdmin() {
+    if (!confirm('هيرجع الموقع للنسخة الأساسية عندك بس، وهيمسح كل الإضافات المحفوظة في المتصفح ده. متأكد؟')) return;
+    localStorage.removeItem('mh-admin-data');
+    loadData();
+    renderGrid();
+    populateSubjectSelect();
+    renderManageList();
+}
+
+// ══════════════════════════════════════════
+//  ADMIN — DOWNLOAD UPDATED FILE
+// ══════════════════════════════════════════
+function downloadSite() {
+    const marker = /\/\* ADMIN_DATA_START \*\/[\s\S]*?\/\* ADMIN_DATA_END \*\//;
+    const replacement = '/* ADMIN_DATA_START */\nconst BASE_DATA = ' + JSON.stringify(currentData, null, 2) + ';\n/* ADMIN_DATA_END */';
+    let output = pristineTemplate.replace(marker, replacement);
+    output = '<!DOCTYPE html>\n' + output.replace(/^<!DOCTYPE html>\s*/i, '');
+
+    const blob = new Blob([output], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 </script>
-</body>
-</html>
+
+
+</body></html>
